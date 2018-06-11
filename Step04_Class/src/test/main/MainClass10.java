@@ -7,6 +7,7 @@ import test.mypac.AttackUnit;
 
 public class MainClass10 {
 	public static void main(String[] args) {
+		System.out.println("main 메소드가 시작되었습니다.");
 		// 기본 data type
 		int num=10;
 		boolean isRun=true;
