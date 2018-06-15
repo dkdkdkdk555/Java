@@ -12,6 +12,13 @@ public class MainClass03 {
 			}
 		};
 		useWeapon(w1);
+		
+		useWeapon(new Weapon() {
+			@Override
+			public void attack() {
+				System.out.println("누군가를 공격해요");
+			}
+		});
 	}
 	
 	public static void useWeapon(Weapon w) {
@@ -19,6 +26,12 @@ public class MainClass03 {
 		w.attack();
 	}
 }
+
+
+
+
+
+
 
 
 
