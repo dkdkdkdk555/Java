@@ -1,5 +1,6 @@
 package test.frame;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,14 +8,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-public class TestFrame03 extends JFrame 
+public class TestFrame05 extends JFrame 
 							implements ActionListener{
 	
 	//생성자
-	public TestFrame03() {
+	public TestFrame05() {
 		//프레임의 레이아웃 설정
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout());
 		
 		//버튼
 		JButton btn1=new JButton("저장");
@@ -31,10 +33,15 @@ public class TestFrame03 extends JFrame
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
 		
-		//프레임에 버튼 추가
-		add(btn1);
-		add(btn2);
-		add(btn3);
+		//페널 객체를 생성해서 
+		JPanel panel=new JPanel();
+		//페널에 버튼을 추가하고 
+		panel.add(btn1);
+		panel.add(btn2);
+		panel.add(btn3);
+		
+		//페널을 프레임의 남쪽에 추가
+		add(panel, BorderLayout.NORTH);
 		
 		setBounds(100, 100, 300, 300);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,7 +49,7 @@ public class TestFrame03 extends JFrame
 	}
 	
 	public static void main(String[] args) {
-		new TestFrame03();
+		new TestFrame05();
 	}
 	//버튼을 누르면 호출되는 메소드 
 	@Override
