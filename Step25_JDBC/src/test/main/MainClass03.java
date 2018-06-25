@@ -6,15 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/*
- *  JDBC (Java Database Connectivity) 
- *  
- *  - java 에서의 DataBase 연동 프로그래밍 연습
- *  - Oracle Database 를 연동하려면 ojdbc6.jar 파일이 사용가능한
- *    위치에 있어야 한다. DB 연동하기 위한 드라이버 클래스가 
- *    ojdbc6.jar 파일에 들어 있다. 
- */
-public class MainClass01 {
+public class MainClass03 {
 	public static void main(String[] args) {
 		Connection conn=null;
 		try {
@@ -31,30 +23,31 @@ public class MainClass01 {
 			se.printStackTrace();
 		}
 		
+		// [ member 테이블에 update 수행하기 ]
+		
+		//수정할 회원의 정보 
+		int num=1;
+		String name="이정호";
+		String addr="아현동";
+		
 		//필요한 객체를 담을 변수 만들기
 		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		try {
-			String sql="SELECT num,name,addr FROM member";
+			String sql="UPDATE member SET name=?,addr=? "
+					+ "WHERE num=?";
 			//sql 문을 수행할 PreparedStatement 객체 얻어내기
 			pstmt=conn.prepareStatement(sql);
-			//쿼리문을 수행하고 결과를 ResultSet 으로 얻어낸다.  
-			rs=pstmt.executeQuery();
-			//반복문 돌면서 ResultSet 에 담긴 정보 추출하기 
-			while(rs.next()) {//cursor 다음에 row 가 있으면
-				//cursor 를 한칸 내려서 cursor 가 위치한 곳의
-				// num, name, addr 을 읽어온다. 
-				int num=rs.getInt("num");
-				String name=rs.getString("name");
-				String addr=rs.getString("addr");
-				//읽어온후 원하는 작업하기 
-				System.out.println(num+"|"+name+"|"+addr);
-			}
+			// ? 에 값 바인딩하기
+			pstmt.setString(1, name);
+			pstmt.setString(2, addr);
+			pstmt.setInt(3, num);
+			// sql 문 수행하기
+			pstmt.executeUpdate();
+			System.out.println("회원정보가 수정되었습니다.");
 		}catch(SQLException se) {
 			se.printStackTrace();
 		}finally {
 			try {
-				if(rs!=null)rs.close();
 				if(pstmt!=null)pstmt.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e) {}
