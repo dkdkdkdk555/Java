@@ -23,7 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class BroadcastClient extends JFrame implements ActionListener{
+public class BroadcastClient extends JFrame 
+					implements ActionListener{
 	//맴버필드
 	String ip, id;
 	private JTextArea jta; //쳇팅의 내용을 출력할곳
@@ -37,6 +38,7 @@ public class BroadcastClient extends JFrame implements ActionListener{
 	private BufferedWriter bw;
 	//생성자
 	public BroadcastClient(String ip, String id){
+		//접속 ip 주소와 대화명을 필드에 저장 
 		this.ip=ip;
 		this.id=id;
 		//메세지를 입력할 TextField
@@ -95,6 +97,7 @@ public class BroadcastClient extends JFrame implements ActionListener{
 		
 		//스레드 시작 시키기
 		new ClientThread().start();
+	
 		//WindowListener 등록
 		addWindowListener(wAdapter);
 		//JTextField ActionListener 등록
